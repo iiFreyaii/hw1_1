@@ -111,6 +111,8 @@ Matrix transpose_matrix(Matrix a)
 double det_matrix(Matrix a)
 {
     // ToDo
+    int m = 0;
+    if (m==1){
     if(a.rows!=a.cols){
         printf("Error: The matrix must be a square matrix.\n");
         return 0;
@@ -160,6 +162,10 @@ double det_matrix(Matrix a)
      dett*=qqq*f;
      return dett;
     }
+    }
+    else {
+        return 0;
+    }
 }
 
 Matrix inv_matrix(Matrix a)
@@ -188,4 +194,5 @@ void print_matrix(Matrix a) {
         // 打印完一行后换行
         printf("\n");
     }
+    return;
 }

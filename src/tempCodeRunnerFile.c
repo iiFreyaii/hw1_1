@@ -1,1 +1,1 @@
-                int rows, cols;
+#include "algebra.h"

@@ -1,0 +1,20 @@
+[
+{
+  "directory": "E:/From GitHub/hw1_1/build",
+  "command": "D:\\tool\\x86_64-7.3.0-release-win32-sjlj-rt_v5-rev0\\mingw64\\bin\\gcc.exe  @CMakeFiles/main.dir/includes_C.rsp -g -o CMakeFiles\\main.dir\\src\\algebra.c.obj -c \"E:\\From GitHub\\hw1_1\\src\\algebra.c\"",
+  "file": "E:/From GitHub/hw1_1/src/algebra.c",
+  "output": "CMakeFiles/main.dir/src/algebra.c.obj"
+},
+{
+  "directory": "E:/From GitHub/hw1_1/build",
+  "command": "D:\\tool\\x86_64-7.3.0-release-win32-sjlj-rt_v5-rev0\\mingw64\\bin\\gcc.exe  @CMakeFiles/main.dir/includes_C.rsp -g -o CMakeFiles\\main.dir\\src\\main.c.obj -c \"E:\\From GitHub\\hw1_1\\src\\main.c\"",
+  "file": "E:/From GitHub/hw1_1/src/main.c",
+  "output": "CMakeFiles/main.dir/src/main.c.obj"
+},
+{
+  "directory": "E:/From GitHub/hw1_1/build",
+  "command": "D:\\tool\\x86_64-7.3.0-release-win32-sjlj-rt_v5-rev0\\mingw64\\bin\\gcc.exe  @CMakeFiles/main.dir/includes_C.rsp -g -o CMakeFiles\\main.dir\\src\\tempCodeRunnerFile.c.obj -c \"E:\\From GitHub\\hw1_1\\src\\tempCodeRunnerFile.c\"",
+  "file": "E:/From GitHub/hw1_1/src/tempCodeRunnerFile.c",
+  "output": "CMakeFiles/main.dir/src/tempCodeRunnerFile.c.obj"
+}
+]

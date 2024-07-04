@@ -118,64 +118,125 @@ Matrix transpose_matrix(Matrix a)
 double det_matrix(Matrix a)
 {
     // ToDo
-
-    if(a.rows!=a.cols){
+    if(a.rows!=a.cols){ 
         printf("Error: The matrix must be a square matrix.\n");
         return 0;
     }
     else{
-        int k;/*k用于记录第k+1次消元,第k+1次消元需要消去a.data[k][k]下面的那一列*/
-        double qqq=1,f=1;/*qqq用于存放每次乘的倍数的累计值,f用于储存行列式前的符号*/
-        for(k=0;k<a.rows-1;k++){/*总共需要n-1次消元*/
+        int k;/*k用于记录第k+1次消元,此时a.data[k][k]是主元，第k+1次消元需要消去a.data[k+1][k]及其下面的那一列数*/
+        double mul=1;
+        int f=1;/*mul用于存放每次乘的倍数的累计值,f用于储存行列式前的符号*/
+        for(k=0;k<a.rows-1;k++){/*如果行列式的值不为零则总共需要n-1次消元*/
 
-        /*找出首项最大的那一行*/
-        int i,temp,f;/*temp用于储存最大数在第几行，f用于储存行列式前的符号*/
-        k=0;
+        /*找出首项最大的那一行,遍历*/
+
+        int i,temp=k;/*temp用于储存首位最大数在第几行(a.data[temp][])*/
         for(i=k;i<a.rows;i++){
-            if(a.data[i+1][k]>a.data[i][k])
+            if(a.data[i][k]>a.data[temp][k])
             temp=i;
         }
 
-        /*把两行的数据交换*/
-        if(temp!=k)
-        f=-f;
-        double t;/*t用于存放临时数据*/
-        for(i=0;i<k;i++){
+        /*把两行([k][temp])的数据交换*/
+
+        if(temp!=k){
+        f=-f;/*换行时需要变号*/
+        double t;/*t用于存放交换时的临时数据*/
+        for(i=0;i<a.rows;i++){
             t=a.data[k][i];
             a.data[k][i]=a.data[temp][i];
             a.data[temp][i]=t;
         }
-
+        }
         /*排除除数等于零的情况*/
         if(a.data[k][k]==0)
         return 0;
 
-        /*进行消元*/
+        /*进行消元消去a.data[k+1][]*/
         int j;
-        double q;/*q用于存放每行需要乘的倍数*/
+        double q;/*q用于存放每次消元中a.data[k][]这行需要乘的倍数*/
         for(i=k+1;i<a.rows;i++){
-            q=a.data[k][k]/a.data[i][k];
-            qqq*=q;
-            for(j=k+1;j<a.rows;j++){
-                a.data[i][j]=a.data[i][j]*q-a.data[k][j];
+            q=a.data[i][k]/a.data[k][k];
+           // mul*=q;
+            for(j=0;j<a.cols;j++){               /*j用于遍历列所以写成a.cols*/
+                a.data[i][j]=a.data[i][j]-a.data[k][j]*q;
             }
         }
     }
     /*最后把对角线乘起来*/
-    double dett=1;
-     for(int i=0;i<k;i++)
-     dett*=a.data[i][i];
-     dett*=qqq*f;
-     return dett;
+    double det=1;/*用来存放行列式的值，这次不乱用变量名了*/ 
+     for(int i=0;i<a.rows;i++)
+     det*=a.data[i][i];
+     det*=/*mul**/f;
+     return det;
+    }
+}
+    
+Matrix delete_matrix(Matrix a,int i,int j){
+    /*用来算伴随矩阵的每一个元素的*/
+    int k,t;
+    Matrix d= create_matrix(a.rows-1,a.cols-1);
+    if(j!=0&&i!=0){
+    for(k=0;k<i;k++){         /*左上角那块*/
+        for(t=0;t<j;t++){
+            d.data[k][t]=a.data[k][t];
+        }
+    }
+    }
+    if(j!=0){
+    for(k=i;k<a.rows;k++){    /*左下角那块*/
+        for(t=0;t<j;t++){
+            d.data[k][t]=a.data[k+1][t];
+        }
+    }
+    }
+    if(i!=0){
+    for(k=0;k<i;k++){          /*右上角那块*/
+        for(t=j;t<a.cols;t++){
+            d.data[k][t]=a.data[k][t+1];
+        }
     }
     }
     
-
+    for(k=i;k<a.rows;k++){     /*右下角那块*/
+        for(t=j;t<a.cols;t++){
+            d.data[k][t]=a.data[k+1][t+1];
+        }
+    }
+return d;
+}
 
 Matrix inv_matrix(Matrix a)
 {
     // ToDo
+if(a.rows!=a.cols){
+    printf("Error: The matrix must be a square matrix.\n");
     return create_matrix(0, 0);
+}
+else if(det_matrix(a)==0){
+    printf("Error: The matrix is singular.\n");
+    return create_matrix(0, 0);
+}
+else{
+
+    /*下面求伴随矩阵*/
+    Matrix com = create_matrix(a.rows,a.cols);/*初始化伴随矩阵*/
+    int i,j;
+    for(i=0;i<a.rows;i++){
+        for(j=0;j<a.cols;j++){
+        com.data[i][j]==det_matrix(delete_matrix(a,i,j));
+        if((i+j)%2!=0)
+        com.data[i][j]=-com.data[i][j];
+        }
+    }
+    Matrix inv =create_matrix(a.rows,a.cols);             /*inv用于存放逆矩阵*/
+    double q=1.0/det_matrix(a);                   /*系数*/
+    for(i=0;i<a.rows;i++){
+        for(j=0;j<a.cols;j++){
+            inv.data[i][j]=q*com.data[i][j];
+        }
+    }
+return inv;
+}
 }
 
 int rank_matrix(Matrix a)
@@ -197,6 +258,8 @@ double trace_matrix(Matrix a){
         return 0;
         }
 }
+
+
 
 void print_matrix(Matrix a) {
     // 遍历矩阵的行

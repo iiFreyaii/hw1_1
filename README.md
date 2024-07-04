@@ -75,11 +75,12 @@ Error: Matrix a and b must have the same rows and cols.
 ### 加法和减法
 ![加减法运行截图](https://ooo.0x0.ooo/2024/07/04/OPRKHS.jpg)
 ### 乘法和数乘
-！[乘法和数乘运行截图](https://ooo.0x0.ooo/2024/07/04/OPRZXN.jpg)
+![乘法和数乘运行截图](https://ooo.0x0.ooo/2024/07/04/OPRZXN.jpg)
 ### 转置
-！[转置运行截图]（https://ooo.0x0.ooo/2024/07/04/OPRyxC.jpg）
+![转置运行截图](https://ooo.0x0.ooo/2024/07/04/OPRyxC.jpg)
 ### 迹
-！[迹运行截图]（）
+![迹运行截图](https://ooo.0x0.ooo/2024/07/04/OPRJBX.jpg)
 ### 行列式的值
-！[行列式的值运行截图]（https://ooo.0x0.ooo/2024/07/04/OPRgJL.jpg）
-### ！[逆矩阵暂时没看出来的错误]（https://ooo.0x0.ooo/2024/07/04/OPRmli.jpg）
+![行列式的值运行截图](https://ooo.0x0.ooo/2024/07/04/OPRgJL.jpg)
+### 逆矩阵(错的，，)
+![逆矩阵暂时没看出来的错误](https://ooo.0x0.ooo/2024/07/04/OPRmli.jpg)
